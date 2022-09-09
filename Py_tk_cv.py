@@ -27,12 +27,17 @@ tex_ar = np.zeros((1,2),int)
 cont = 0
 global pin9
 
-board=pyfirmata.Arduino('COM4')
+try:
 
-iter8 = pyfirmata.util.Iterator(board)
-iter8.start()
+    board=pyfirmata.Arduino('COM4')
 
-pin9 = board.get_pin('d:5:s')
+    iter8 = pyfirmata.util.Iterator(board)
+    iter8.start()
+
+    pin9 = board.get_pin('d:5:s')
+except:
+
+    print("Keine Verbindung mit Arduino")
 
 
 

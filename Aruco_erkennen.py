@@ -2,9 +2,9 @@ import cv2 as cv
 import numpy as np
 import math
 
-cap = cv.VideoCapture(1
-                      )
-
+cap = cv.VideoCapture(1)
+def no(x):
+    pass
 aruco_dic = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_50)
 aruco_dic2 = cv.aruco.Dictionary_get(cv.aruco.DICT_5X5_50)
 aruco_dic3 = cv.aruco.Dictionary_get(cv.aruco.DICT_6X6_50)
@@ -15,7 +15,8 @@ cont = 0
 
 def line(x,y):
     pass
-
+cv.namedWindow("win")
+cv.createTrackbar("t_bar","win",0,255,no)
 
 
 
@@ -26,6 +27,12 @@ while True:
     frame = cv.resize(frame,(1020,720))
 
     fr_gr = cv.cvtColor(frame,cv.COLOR_BGRA2GRAY)
+
+    t = cv.getTrackbarPos("t_bar","win")
+
+
+    ok ,th_img = cv.threshold(fr_gr,t,255,cv.ADAPTIVE_THRESH_MEAN_C)
+    th_img = np.array(th_img)
 
     corner, ids, rej_cor = cv.aruco.detectMarkers(fr_gr,aruco_dic)
     corner2, ids2, rej_cor2 = cv.aruco.detectMarkers(fr_gr,aruco_dic2)
@@ -54,6 +61,7 @@ while True:
 
 
 
+
     ploy_punkte2[0] = ploy_punkte[0]
     ploy_punkte2[1] = ploy_punkte[2]
     #print(w)
@@ -72,11 +80,11 @@ while True:
 
     except: pass
     try:
-        text = cv.putText(frame,f"{round(p_dif)}",([ploy_punkte2]),cv.FONT_HERSHEY_PLAIN,4,(255,0,0),2 )
+        text = cv.putText(frame,f"{p_dif}",(500,500),cv.FONT_HERSHEY_PLAIN,4,(255,0,0),2 )
     except:pass
 
 
-    cv.imshow("bild",frame)
+    cv.imshow("win",th_img)
     #cv.imshow("bild1", fr_gr)
 
 

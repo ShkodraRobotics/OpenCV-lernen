@@ -76,7 +76,7 @@ while True:
 
 
 
-    cv.imshow("win", fr_gr)
+    #cv.imshow("win", fr_gr)
     cv.imshow("bild1", frame)
 
     if cv.waitKey(1) == ord("q"):

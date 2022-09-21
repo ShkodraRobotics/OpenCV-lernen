@@ -50,7 +50,7 @@ def move_servo(angle):
 def win():
     ret, frame = cap.read()
 
-    frame = cv.resize(frame, (1020, 720))
+    #frame = cv.resize(frame, (1020, 720))
 
     fr_gr = cv.cvtColor(frame, cv.COLOR_BGRA2GRAY)
 

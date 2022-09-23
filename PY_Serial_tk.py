@@ -62,10 +62,10 @@ def move_servo2(pos):
 
 
 root = tk.Tk()
-sc = tk.Scale(root,command=sup0, from_=100, to=270,orient=tk.HORIZONTAL, length=400, label='Klaue')
+sc = tk.Scale(root,command=sup0, from_=0, to=180,orient=tk.HORIZONTAL, length=400, label='Klaue')
 sc.pack(anchor=tk.CENTER)
 sc2 = tk.Scale(root,command=sup1, from_=100, to=650,orient=tk.HORIZONTAL, length=400, label='Arm_1')
-#sc2.set(250)
+sc2.set(315)
 sc2.pack(anchor=tk.CENTER)
 sc3 = tk.Scale(root,command=sup2, from_=100, to=670,orient=tk.HORIZONTAL, length=400, label='Arm_2')
 sc3.pack(anchor=tk.CENTER)

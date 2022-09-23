@@ -2,9 +2,23 @@ import cv2 as cv
 import numpy as np
 import math
 from scipy.spatial import distance as dist
-
-cap = cv.VideoCapture(0)
-
+import serial
+import sys
+try:
+    cap = cv.VideoCapture(0)
+    ser = serial.Serial("COM4",baudrate=115200, timeout=.1)
+except:
+    print("Error no Video")
+def sup0(val):
+    # Add semicolon after the value
+    val = val - 0.8
+    val = (180 -((180/5.5) * val))
+    msg0 = "1" +str(val)+";"
+    print(msg0)
+    # Encode the message
+    encodedMessage = msg0.encode()
+    # Send the encoded message
+    ser.write(encodedMessage)
 
 
 def definer(entscheider_var):
@@ -44,7 +58,7 @@ while True:
     wid = frame.shape[1]
 
 
-    ok ,th_img = cv.threshold(fr_gr,241,255,cv.ADAPTIVE_THRESH_MEAN_C)
+    ok ,th_img = cv.threshold(fr_gr,247,255,cv.ADAPTIVE_THRESH_MEAN_C)
     th_img = np.array(th_img)
 
     corner, ids, rej_cor = cv.aruco.detectMarkers(fr_gr,aruco_dic)
@@ -123,6 +137,7 @@ while True:
     except: pass
     try:
         text = cv.putText(frame,f"{p_dif}",(0,100),cv.FONT_HERSHEY_PLAIN,4,(255,0,0),2 )
+        print(text)
     except:pass
 
     th_corn, hi = cv.findContours(th_img, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
@@ -182,9 +197,9 @@ while True:
                 p3_rec = math.sqrt(((p1_x - p2_x) ** 2) + ((p1_y - p2_y) ** 2))
 
                 try:
-
                     p_dif_rec = p3_rec / min_punte_distanz_cm
                     text2 = cv.putText(frame, f"{p_dif_rec}", text_punkt_min_con, cv.FONT_HERSHEY_PLAIN, 2, (255, 0, 255), 2)
+                    sup0(p_dif_rec)
                     #p_dif_rec2 = p4_rec / ref
                     print(p_dif_rec)
                     #print(p_dif_rec2 +2)

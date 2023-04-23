@@ -1,7 +1,7 @@
 
 import pyfirmata
 from tkinter import *
-^
+
 
 def move_servo(angle):
     pin9.write(angle)

@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 
-cap = cv.VideoCapture(2)
+cap = cv.VideoCapture(0)
 
 var2 = np.zeros((4,2),int)
 count = 0
